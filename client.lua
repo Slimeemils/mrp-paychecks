@@ -2,17 +2,18 @@ QBCore = exports['qb-core']:GetCoreObject()
 
 local wait = 60000*15
 
-Citizen.CreateThread(function()
-    LifeInvader = AddBlipForCoord(-1082.91, -247.99, 37.76)
-    SetBlipSprite (LifeInvader, 605)
-    SetBlipDisplay(LifeInvader, 4)
-    SetBlipScale  (LifeInvader, 0.8)
-    SetBlipAsShortRange(LifeInvader, true)
-    -- SetBlipColour(LifeInvader, 50)
-    BeginTextCommandSetBlipName("STRING")
-    AddTextComponentSubstringPlayerName("Life Invader")
-    EndTextCommandSetBlipName(LifeInvader)
-end) 
+CreateThread(function()
+    for k, pickup in pairs(Config.Location["pickup"]) do
+        local blip = AddBlipForCoord(location.coords.x, location.coords.y, location.coords.z)
+        SetBlipSprite(605)
+        SetBlipAsShortRange(blip, true)
+        SetBlipScale(blip, 0.8)
+        SetBlipColour(50)
+        BeginTextCommandSetBlipName("STRING")
+        AddTextComponentString(pickup.label)
+        EndTextCommandSetBlipName(blip)
+    end
+end)
 
 Citizen.CreateThread(function()
     while true do
