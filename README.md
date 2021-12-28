@@ -6,4 +6,4 @@ Paycheck system for QBCore
 This resource makes it so that players have to pick up their paychecks from Life Invader rather than it being deposited straight into their accounts.
 Enjoy!
 
-
+Currently set to receive a paycheck every 15 minutes.
