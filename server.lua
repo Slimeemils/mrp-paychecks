@@ -7,7 +7,7 @@ AddEventHandler('mrp-paychecks:Register', function()
 	local cid = xPlayer.PlayerData.citizenid
     local payment = xPlayer.PlayerData.job.payment
     if xPlayer.PlayerData.job.onduty then
-        exports.oxmysql:fetch("SELECT * FROM `paychecks` WHERE citizenid = '"..cid.."'", function(result)
+        MySQL.Async.fetchAll("SELECT * FROM `paychecks` WHERE citizenid = '"..cid.."'", function(result)
             if result[1] ~= nil then
                 local collectamount = result[1].collectamount+payment
                 local currentpaycheck = result[1].collectamount
@@ -30,7 +30,7 @@ AddEventHandler('mrp-paychecks:Collect', function()
 	local xPlayer = QBCore.Functions.GetPlayer(source)	
 	local cid = xPlayer.PlayerData.citizenid
     local payment = xPlayer.PlayerData.job.payment
-    exports.oxmysql:fetch("SELECT * FROM `paychecks` WHERE citizenid = '"..cid.."'", function(result)
+    MySQL.Async.fetchAll("SELECT * FROM `paychecks` WHERE citizenid = '"..cid.."'", function(result)
         if result[1] ~= nil then
             local paycheck = result[1].collectamount
             xPlayer.Functions.AddMoney("cash", paycheck)
